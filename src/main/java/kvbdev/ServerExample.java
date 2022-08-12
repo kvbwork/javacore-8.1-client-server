@@ -13,19 +13,21 @@ public class ServerExample {
         int port = 8080;
 
         try (ServerSocket serverSocket = new ServerSocket(port)) {
-            try (
-                    Socket clientSocket = serverSocket.accept();
-                    PrintWriter out = new PrintWriter(clientSocket.getOutputStream(), true);
-                    BufferedReader in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()))
-            ) {
-                System.out.printf("server: New connection accepted from %s:%d%n",
-                        clientSocket.getRemoteSocketAddress(), clientSocket.getPort());
+            while(true) {
+                try (
+                        Socket clientSocket = serverSocket.accept();
+                        PrintWriter out = new PrintWriter(clientSocket.getOutputStream(), true);
+                        BufferedReader in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()))
+                ) {
+                    System.out.printf("server: New connection accepted from %s:%d%n",
+                            clientSocket.getRemoteSocketAddress(), clientSocket.getPort());
 
-                final String clientMessage = in.readLine();
-                String resultMessage = "The server got a message: '" + clientMessage + "'";
+                    final String clientMessage = in.readLine();
+                    String resultMessage = "The server got a message: '" + clientMessage + "'";
 
-                System.out.println("server: " + resultMessage);
-                out.println(resultMessage);
+                    System.out.println("server: " + resultMessage);
+                    out.println(resultMessage);
+                }
             }
         } catch (IOException ex) {
             ex.printStackTrace();
