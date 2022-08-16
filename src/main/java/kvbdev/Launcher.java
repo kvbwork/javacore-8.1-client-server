@@ -9,7 +9,9 @@ public class Launcher {
 
         CompletableFuture.allOf(
                 CompletableFuture.runAsync(() -> ServerExample.main(null))
-                        .completeOnTimeout(null, 10, TimeUnit.SECONDS),
+                        .completeOnTimeout(null, 5, TimeUnit.SECONDS),
+                CompletableFuture.runAsync(() -> ClientExample.main(null)),
+                CompletableFuture.runAsync(() -> ClientExample.main(null)),
                 CompletableFuture.runAsync(() -> ClientExample.main(null))
         ).join();
 

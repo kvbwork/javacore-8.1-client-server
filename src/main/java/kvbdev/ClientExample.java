@@ -18,11 +18,7 @@ public class ClientExample {
                 PrintWriter out = new PrintWriter(socket.getOutputStream(), true);
                 BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
         ) {
-            out.println("HELLO");
-
-            final String message = in.readLine();
-            System.out.println("client: " + message);
-
+            out.println("CLIENT");
         } catch (IOException ex) {
             ex.printStackTrace();
         }

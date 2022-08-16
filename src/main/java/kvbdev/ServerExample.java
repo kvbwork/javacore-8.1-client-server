@@ -19,14 +19,9 @@ public class ServerExample {
                         PrintWriter out = new PrintWriter(clientSocket.getOutputStream(), true);
                         BufferedReader in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()))
                 ) {
-                    System.out.printf("server: New connection accepted from %s:%d%n",
-                            clientSocket.getRemoteSocketAddress(), clientSocket.getPort());
-
-                    final String clientMessage = in.readLine();
-                    String resultMessage = "The server got a message: '" + clientMessage + "'";
-
-                    System.out.println("server: " + resultMessage);
-                    out.println(resultMessage);
+                    System.out.println("New connection accepted");
+                    final String name = in.readLine();
+                    System.out.println(String.format("Hi %s, your port is %d%n", name, clientSocket.getPort()));
                 }
             }
         } catch (IOException ex) {
